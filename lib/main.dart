@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/ui/auth/screens/register_screen.dart';
 
 void main() {
   runApp(const Movies());
