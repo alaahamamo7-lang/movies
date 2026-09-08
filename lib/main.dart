@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-
+import 'package:movies/modules/splash/ui/splash_screen.dart';
 void main() {
-  runApp(const Movies());
+  runApp(const MyApp());
 }
 
-class Movies extends StatelessWidget {
-  const Movies({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'movie Splash',
+      home: const SplashScreen(),
+    );
+
   }
 }
