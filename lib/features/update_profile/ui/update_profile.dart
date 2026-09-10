@@ -1,39 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_text.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_form_felid_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/main_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
+import 'package:movies/features/update_profile/widget/custom_bottom_sheet.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
+class UpdateProfileScreen extends StatefulWidget {
   static const String routeName = "/updateProfile";
-  final GlobalKey<FormState> formState = GlobalKey<FormState>();
-  String selectedAvatar = AppAssets.avatar1;
-  List<String> avatarList = [
-    AppAssets.avatar1,
-    AppAssets.avatar2,
-    AppAssets.avatar3,
-    AppAssets.avatar4,
-    AppAssets.avatar5,
-    AppAssets.avatar6,
-    AppAssets.avatar8,
-    AppAssets.avatar9,
-  ];
 
-  void _pickAvatar(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(color: Colors.blue);
-      },
-    );
-  }
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+
+  String selectedAvatar = AppAssets.avatar1;
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     double sizeW = MediaQuery.sizeOf(context).width;
     double sizeH = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.arrow_back, color: theme.colorScheme.primary),
@@ -45,6 +35,7 @@ class UpdateProfileScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -53,7 +44,15 @@ class UpdateProfileScreen extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    _pickAvatar(context);
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => CustomBottomSheet(
+                        onAvatarSelect: (newAvatarPath) {
+                          selectedAvatar = newAvatarPath;
+                          setState(() {});
+                        },
+                      ),
+                    );
                   },
                   child: CircleAvatar(
                     backgroundImage: AssetImage(selectedAvatar),
@@ -64,6 +63,7 @@ class UpdateProfileScreen extends StatelessWidget {
               SizedBox(height: sizeH * 0.02),
               Expanded(
                 child: Form(
+                  key: _formState,
                   child: Column(
                     children: [
                       CustomTextFormField(

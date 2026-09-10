@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/app_theme.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_form_felid_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/main_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "/loginScreen";
