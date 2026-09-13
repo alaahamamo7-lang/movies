@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies/modules/splash/ui/splash_screen.dart';
+import 'package:movies/modules/auth/screens/forget_password_screen.dart';
+import 'package:movies/modules/auth/screens/register_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,9 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'movie Splash',
-      home: const SplashScreen(),
+      title: 'Movies App',
+      home: const ForgetPasswordScreen(),
     );
-
   }
 }

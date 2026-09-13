@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:movies/core/utilis/app_validators.dart';
+import 'package:movies/modules/auth/widgets/change_language_widget.dart';
+import 'package:movies/modules/auth/widgets/custom_text_field_widgt.dart';
 
 import '../../../core/utilis/app_assets.dart';
 import '../widgets/avatar_card_widget.dart';
 import '../widgets/avatar_widget.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   final AvatarWidget? avatar;
 
   const RegisterScreen({super.key, this.avatar});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,204 +32,116 @@ class RegisterScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            // const SizedBox(height: 14),
-            // CarouselSlider.builder(
-            //   itemCount: AvatarWidget.avatars.length,
-            //   itemBuilder: (context, index, realIndex) {
-            //     return AvatarCardWidget(avatar: AvatarWidget.avatars[index]);
-            //   },
-            //   options: CarouselOptions(
-            //     height: 160,
-            //     enlargeStrategy: CenterPageEnlargeStrategy.scale,
-            //     disableCenter: false,
-            //     reverse: true,
-            //     viewportFraction: 0.3,
-            //     enlargeCenterPage: true,
-            //     enableInfiniteScroll: true,
-            //     autoPlay: true,
-            //     padEnds: true,
-            //   ),
-            // ),
-            AvatarCardWidget(onAvatarSelected: (value) {}),
-            const SizedBox(height: 24),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282A28),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hint: Row(
-                    children: [
-                      Center(child: SvgPicture.asset(AppAssets.nameIcon)),
-                      const SizedBox(width: 8),
-                      Text("Name", style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282A28),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hint: Row(
-                    children: [
-                      Center(child: SvgPicture.asset(AppAssets.emailIcon)),
-                      const SizedBox(width: 8),
-                      Text("Email", style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282A28),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hint: Row(
-                    children: [
-                      Center(child: SvgPicture.asset(AppAssets.passwordIcon)),
-                      // Icon(Icons.lock, color: Colors.white),
-                      const SizedBox(width: 8),
-                      Text("Password", style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                  suffixIcon: Icon(Icons.remove_red_eye, color: Colors.white),
-                  // prefixIcon: Icon(Icons.abc),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282A28),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hint: Row(
-                    children: [
-                      Center(child: SvgPicture.asset(AppAssets.passwordIcon)),
-                      // Icon(Icons.lock, color: Colors.white),
-                      const SizedBox(width: 8),
-                      Text(
-                        "Confirm Password",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  suffixIcon: Icon(Icons.remove_red_eye, color: Colors.white),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xff282A28),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hint: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Center(child: SvgPicture.asset(AppAssets.phoneIcon)),
-                      const SizedBox(width: 8),
-                      Text(
-                        "Phone Number",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                // width: MediaQuery.of(context).size.width * .7,
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                padding: EdgeInsets.symmetric(vertical: 14),
-                decoration: BoxDecoration(
-                  color: Color(0xffF6BD00),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Center(
-                  child: Text(
-                    "Create Account",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
               children: [
-                Text(
-                  "Already have Account ?",
-                  style: TextStyle(color: Colors.white),
+                AvatarCardWidget(onAvatarSelected: (value) {}),
+                const SizedBox(height: 24),
+                CustomTextFormField(
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  hintText: "name",
+                  // suffixIcon: Icon(Icons.visibility),
+                  prefixIcon: AppAssets.nameIcon,
+                  isPassword: false,
+                  validator: (name) =>
+                      AppValidators.validateUserName(name: name),
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  "Login",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Color(0xffF6BD00),
+                const SizedBox(height: 24),
+                CustomTextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  hintText: "email",
+                  // suffixIcon: Icon(Icons.visibility),
+                  prefixIcon: AppAssets.emailIcon,
+                  isPassword: false,
+                  validator: (email) =>
+                      AppValidators.validateEmail(email: email),
+                ),
+                const SizedBox(height: 24),
+                CustomTextFormField(
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  hintText: "password",
+                  suffixIcon: Icon(Icons.visibility),
+                  prefixIcon: AppAssets.passwordIcon,
+                  isPassword: true,
+                  validator: (password) =>
+                      AppValidators.validatePassword(password: password),
+                ),
+                const SizedBox(height: 24),
+                CustomTextFormField(
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  hintText: "confirm password",
+                  suffixIcon: Icon(Icons.visibility),
+                  prefixIcon: AppAssets.passwordIcon,
+                  isPassword: true,
+                  validator: (confirmPassword) =>
+                      AppValidators.validateConfirmPassword(
+                        confirmPassword: confirmPassword,
+                      ),
+                ),
+                const SizedBox(height: 24),
+                CustomTextFormField(
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  hintText: "phone number",
+                  // suffixIcon: Icon(Icons.visibility),
+                  prefixIcon: AppAssets.phoneIcon,
+                  isPassword: false,
+                  validator: (phoneNumber) =>
+                      AppValidators.validatePhoneNumber(phone: phoneNumber),
+                ),
+                const SizedBox(height: 24),
+                InkWell(
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {}
+                  },
+                  child: Container(
+                    // width: MediaQuery.of(context).size.width * .7,
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xffF6BD00),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Create Account",
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                    ),
                   ),
                 ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have Account ?",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color(0xffF6BD00),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                ChangeLanguageWidget(onTap: () {}),
               ],
             ),
-            const SizedBox(height: 24),
-            Container(
-              height: 50,
-              width: 95,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffF6BD00)),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: SvgPicture.asset(AppAssets.englishIcon, height: 40),
-                  ),
-                  const SizedBox(width: 8),
-                  InkWell(
-                    child: SvgPicture.asset(AppAssets.egyptIcon, height: 40),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -53,7 +53,7 @@ class _AvatarCardWidgetState extends State<AvatarCardWidget> {
         );
       },
       options: CarouselOptions(
-        height: 176,
+        height: 120,
         enlargeStrategy: CenterPageEnlargeStrategy.scale,
         viewportFraction: 0.3,
         enlargeCenterPage: true,
