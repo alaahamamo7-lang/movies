@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/modules/onboarding/controller/onboarding_model_logic.dart';
+import 'package:movies/features/onboarding/controller/onboarding_model_logic.dart';
 import 'package:movies/core/app_colors.dart';
 
 class OnBoardingpage extends StatelessWidget {

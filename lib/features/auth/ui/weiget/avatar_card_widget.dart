@@ -1,6 +1,4 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'avatar_widget.dart';
@@ -53,7 +51,7 @@ class _AvatarCardWidgetState extends State<AvatarCardWidget> {
         );
       },
       options: CarouselOptions(
-        height: 176,
+        height: 120,
         enlargeStrategy: CenterPageEnlargeStrategy.scale,
         viewportFraction: 0.3,
         enlargeCenterPage: true,

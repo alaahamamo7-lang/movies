@@ -1,4 +1,4 @@
-import '../../../core/utilis/app_assets.dart';
+import '../../../../core/utilis/app_assets.dart';
 
 class AvatarWidget {
   final String imagePath;

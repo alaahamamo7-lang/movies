@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
-import 'package:movies/modules/onboarding/controller/onboarding_model_logic.dart';
-import 'package:movies/modules/onboarding/ui/widgets/onboarding_page_item.dart';
+import 'package:movies/features/onboarding/controller/onboarding_model_logic.dart';
+import 'package:movies/features/onboarding/ui/widgets/onboarding_page_item.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -43,9 +43,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: AppColors.black,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(28),
-                ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               ),
               padding: const EdgeInsets.fromLTRB(24, 28, 24, 32),
               child: Column(
@@ -86,7 +84,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          controller.currentPage == pages.length - 1 ? 'Finish' : 'Next',
+                          controller.currentPage == pages.length - 1
+                              ? 'Finish'
+                              : 'Next',
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -104,7 +104,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.yellow, width: 1.5),
+                          border: Border.all(
+                            color: AppColors.yellow,
+                            width: 1.5,
+                          ),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: const Center(
@@ -128,4 +131,3 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 }
-

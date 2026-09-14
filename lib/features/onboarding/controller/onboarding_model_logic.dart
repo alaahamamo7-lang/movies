@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/features/auth/ui/screens/login_screen.dart';
 
 class OnBoardingScreenData {
@@ -65,10 +66,7 @@ class OnBoardingController {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-      );
+      Navigator.pushReplacement(context, AppRoutes.loginScreen());
     }
   }
 

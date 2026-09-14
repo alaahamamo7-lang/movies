@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
-import 'package:movies/modules/onboarding/ui/screen//onboarding_screen.dart';
+import 'package:movies/features/onboarding/ui/screen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/splash";
