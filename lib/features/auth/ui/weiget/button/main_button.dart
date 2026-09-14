@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
   final Widget label;
+  final Color buttonBg;
+  final Color buttonFg;
   final void Function()? onPressed;
-  const MainButton({super.key, required this.label, this.onPressed});
+  const MainButton({
+    super.key,
+    required this.label,
+    required this.buttonBg,
+    required this.buttonFg,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +20,8 @@ class MainButton extends StatelessWidget {
 
     return Center(
       child: CupertinoButton(
-        color: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.secondary,
+        color: buttonBg,
+        foregroundColor: buttonFg,
         borderRadius: BorderRadius.circular(16),
         onPressed: onPressed,
         child: Center(child: label),

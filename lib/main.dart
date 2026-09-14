@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/constants/app_theme.dart';
 import 'package:movies/features/auth/ui/screens/login_screen.dart';
+import 'package:movies/features/update_profile/ui/update_profile.dart';
 import 'package:movies/modules/splash/ui/splash_screen.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class Movies extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         SplashScreen.routeName: (_) => const SplashScreen(),
+        UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
       },
       initialRoute: SplashScreen.routeName,
     );

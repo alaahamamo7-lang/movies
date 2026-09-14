@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/app_theme.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/custom_text_form_felid_button.dart';
-import 'package:movies/features/auth/ui/weigets/button/main_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "/loginScreen";
@@ -57,7 +57,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: .end,
                         children: [
-                          CustomTextButton(label: AppText.forgetPassword),
+                          CustomTextButton(
+                            label: Text(
+                              AppText.forgetPassword,
+                              style: theme.textTheme.displaySmall,
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(height: size * 0.02),
@@ -70,6 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: theme.colorScheme.secondary,
                           ),
                         ),
+                        buttonBg: theme.colorScheme.primary,
+                        buttonFg: theme.colorScheme.secondary,
                         onPressed: () {},
                       ),
                       SizedBox(height: size * 0.02),
@@ -82,7 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: theme.colorScheme.secondary,
                             ),
                           ),
-                          CustomTextButton(label: "Create One"),
+                          CustomTextButton(
+                            label: Text(
+                              "Create One",
+                              style: theme.textTheme.displaySmall,
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(height: size * 0.02),
@@ -116,6 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: size * 0.04),
                       MainButton(
                         onPressed: () {},
+                        buttonBg: theme.colorScheme.primary,
+                        buttonFg: theme.colorScheme.secondary,
                         label: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
