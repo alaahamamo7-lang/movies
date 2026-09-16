@@ -29,14 +29,10 @@ class CustomTextFormField extends StatelessWidget {
                 fit: .scaleDown,
                 height: size.height * 0.026,
               ),
-        prefixIcon: SvgPicture.asset(
-          colorFilter: ColorFilter.mode(
-            theme.colorScheme.onSurfaceVariant,
-            BlendMode.srcIn,
-          ),
+        prefixIcon: Image.asset(
           icon,
+          color: theme.colorScheme.onSurfaceVariant,
           fit: .scaleDown,
-          height: size.height * 0.026,
         ),
         hintText: hint,
         hintStyle: theme.textTheme.displayMedium,

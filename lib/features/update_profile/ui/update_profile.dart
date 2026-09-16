@@ -7,8 +7,7 @@ import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 import 'package:movies/features/update_profile/widget/custom_bottom_sheet.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  static const String routeName = "/updateProfile";
-
+  const UpdateProfileScreen({super.key});
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
 }
@@ -66,15 +65,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   key: _formState,
                   child: Column(
                     children: [
-                      CustomTextFormField(
-                        hint: "Name",
-                        icon: AppAssets.svgPerson,
-                      ),
+                      CustomTextFormField(hint: "Name", icon: AppAssets.person),
                       SizedBox(height: sizeH * 0.02),
-                      CustomTextFormField(
-                        hint: "Phone",
-                        icon: AppAssets.svgPhone,
-                      ),
+                      CustomTextFormField(hint: "Phone", icon: AppAssets.phone),
                       SizedBox(height: sizeH * 0.001),
                       Row(
                         mainAxisAlignment: .start,

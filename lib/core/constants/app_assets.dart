@@ -5,8 +5,11 @@ abstract final class AppAssets {
   static const String svgPassword = "assets/icons/password.svg";
   static const String svgEyeOff = "assets/icons/eyeOff.svg";
   static const String svgGoogle = "assets/icons/icon_google.svg";
-  static const String svgPhone = "assets/icons/phone.svg";
-  static const String svgPerson = "assets/icons/person";
+
+  static const String svgHouse = "assets/icons/house.svg";
+  static const String svgSearch = "assets/icons/search.svg";
+  static const String svgExplore = "assets/icons/explore.svg";
+  static const String svgProfile = "assets/icons/profiel.svg";
   //--------------------------------------------------------------------
   static const String avatar1 = "assets/images/avatar1.png";
   static const String avatar2 = "assets/images/avatar2.png";
@@ -17,4 +20,6 @@ abstract final class AppAssets {
   static const String avatar7 = "assets/images/avatar7.png";
   static const String avatar8 = "assets/images/avatar8.png";
   static const String avatar9 = "assets/images/avatar9.png";
+  static const String person = "assets/images/user.png";
+  static const String phone = "assets/images/phone.png";
 }

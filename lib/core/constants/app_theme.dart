@@ -13,6 +13,16 @@ abstract final class AppTheme {
       surface: AppColor.bgColor,
       onSurfaceVariant: AppColor.white,
     ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: .fixed,
+      backgroundColor: AppColor.second,
+      selectedItemColor: AppColor.primary,
+      showSelectedLabels: false,
+
+      unselectedItemColor: AppColor.white,
+      showUnselectedLabels: false,
+    ),
     textTheme: TextTheme(
       displayMedium: TextStyle(
         color: AppColor.white,
