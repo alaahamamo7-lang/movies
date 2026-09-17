@@ -4,6 +4,8 @@ import 'package:movies/features/auth/ui/screens/login_screen.dart';
 import 'package:movies/features/update_profile/ui/update_profile.dart';
 import 'package:movies/features/ui/splash_screen.dart';
 
+import 'features/home/presentation/screens/home_screen.dart';
+
 void main() {
   runApp(Movies());
 }

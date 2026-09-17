@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/constants/routes/app_routes.dart';
-import 'package:movies/features/auth/ui/screens/login_screen.dart';
 
 class OnBoardingScreenData {
   final String imagePath;
@@ -49,7 +48,7 @@ final List<OnBoardingScreenData> pages = [
         "Share your thoughts on the movies you've watched.Dive deep into film details and help others discover great movies with your reviews.",
   ),
   OnBoardingScreenData(
-    imagePath: 'assets/onboarding_5.png',
+    imagePath: 'assets/onboarding_6.png',
     title: 'Start Watching Now',
     subtitle: '',
   ),
