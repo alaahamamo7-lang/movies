@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/core/utilis/app_validators.dart';
-import 'package:movies/features/auth/ui/viewModel/register_viewModel.dart';
+import 'package:movies/features/auth/ui/cubit/register_cubit.dart';
+import 'package:movies/features/auth/ui/cubit/states/register_state.dart';
 import 'package:movies/features/auth/ui/weiget/change_language_widget.dart';
 import 'package:movies/features/auth/ui/weiget/custom_text_field_widgt.dart';
 
@@ -20,24 +24,43 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    phoneNumberController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff121312),
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back, color: Color(0xffFFBB3B)),
-        ),
+    return BlocProvider(
+      // bloc: RegisterViewModel(),
+      create: (context) => RegisterCubit(FirebaseAuth.instance),
+      child: Scaffold(
         backgroundColor: Color(0xff121312),
-        title: Text("Register", style: TextStyle(color: Color(0xffFFBB3B))),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: BlocBuilder<RegisterViewModel, RegisterStates>(
-            bloc: RegisterViewModel(),
-            builder: (context, state) => Form(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back, color: Color(0xffFFBB3B)),
+          ),
+          backgroundColor: Color(0xff121312),
+          title: Text("Register", style: TextStyle(color: Color(0xffFFBB3B))),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Form(
               key: formKey,
               child: Column(
                 children: [
@@ -50,37 +73,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.nameIcon,
                     isPassword: false,
-                    controller: context
-                        .read<RegisterViewModel>()
-                        .userNameController,
+                    controller: userNameController,
                     validator: (name) =>
                         AppValidators.validateUserName(name: name),
                   ),
                   const SizedBox(height: 24),
                   CustomTextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
                     hintText: "email",
-                    // suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.emailIcon,
                     isPassword: false,
-                    controller: context
-                        .read<RegisterViewModel>()
-                        .emailController,
+                    maxLines: 1,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    controller: emailController,
                     validator: (email) =>
                         AppValidators.validateEmail(email: email),
                   ),
+
                   const SizedBox(height: 24),
                   CustomTextFormField(
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
                     hintText: "password",
-                    suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.passwordIcon,
                     isPassword: true,
-                    controller: context
-                        .read<RegisterViewModel>()
-                        .passwordController,
+                    maxLines: 1,
+                    suffixIcon: Icon(Icons.visibility),
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
+
+                    controller: passwordController,
                     validator: (password) =>
                         AppValidators.validatePassword(password: password),
                   ),
@@ -92,12 +112,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.passwordIcon,
                     isPassword: true,
-                    controller: context
-                        .read<RegisterViewModel>()
-                        .confirmPasswordController,
+                    controller: confirmPasswordController,
                     validator: (confirmPassword) =>
                         AppValidators.validateConfirmPassword(
                           confirmPassword: confirmPassword,
+                          password: passwordController.text,
                         ),
                   ),
                   const SizedBox(height: 24),
@@ -110,14 +129,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     isPassword: false,
                     validator: (phoneNumber) =>
                         AppValidators.validatePhoneNumber(phone: phoneNumber),
+                    controller: phoneNumberController,
                   ),
                   const SizedBox(height: 24),
-                  BlocBuilder<RegisterViewModel, RegisterStates>(
-                    bloc: RegisterViewModel(),
+                  BlocConsumer<RegisterCubit, RegisterState>(
+                    listener: (context, state) {
+                      if (state.errorMessage != null &&
+                          state.isLoading == false &&
+                          state.isSuccess == false) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              state.errorMessage,
+                              textAlign: TextAlign.center,
+                            ),
+                            backgroundColor: AppColor.red,
+                            behavior: SnackBarBehavior.floating,
+                            width: 300,
+                          ),
+                        );
+                      }
+                      if (state.isSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              textAlign: TextAlign.center,
+                              "Account Created Successfully",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: AppColor.green,
+                            behavior: SnackBarBehavior.floating,
+                            width: 300,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
                     builder: (context, state) => InkWell(
-                      onTap: () {
-                        state.isLoading ? RegisterViewModel().register() : null;
-                      },
+                      onTap: state.isLoading
+                          ? null
+                          : () {
+                              if (!formKey.currentState!.validate()) return;
+                              context.read<RegisterCubit>().register(
+                                context,
+                                email: emailController.text.trim(),
+                                password: passwordController.text,
+                              );
+                            },
+
                       child: Container(
                         // width: MediaQuery.of(context).size.width * .7,
                         width: double.infinity,
@@ -129,20 +188,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         child: Center(
                           child: state.isLoading
-                              ? Text(
+                              ? Center(
+                                  child: const CircularProgressIndicator(
+                                    color: AppColor.white,
+                                  ),
+                                )
+                              : Text(
                                   "Create Account",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
                                   ),
-                                )
-                              : Center(
-                                  child: const CircularProgressIndicator(),
                                 ),
                         ),
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

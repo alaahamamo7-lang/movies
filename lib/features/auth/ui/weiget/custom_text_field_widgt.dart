@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/app_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField({
     super.key,
-    this.controller,
+    required this.controller,
     required this.keyboardType,
     required this.textInputAction,
     this.validator,
@@ -46,6 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextFormField(
+        controller: widget.controller,
         maxLines: widget.maxLines,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,

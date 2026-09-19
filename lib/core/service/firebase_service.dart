@@ -11,6 +11,7 @@ class FirebaseService {
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+      return credential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw ('The password provided is too weak.');
@@ -24,19 +25,9 @@ class FirebaseService {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
-        .authenticate();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth = googleUser!.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      idToken: googleAuth.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    final account = await GoogleSignIn.instance.authenticate();
+    final idToken = account.authentication.idToken;
+    final credential = GoogleAuthProvider.credential(idToken: idToken);
+    return FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

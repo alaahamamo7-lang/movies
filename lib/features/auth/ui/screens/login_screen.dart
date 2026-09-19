@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
+import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/app_theme.dart';
+import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/core/utilis/app_validators.dart';
-import 'package:movies/features/auth/ui/viewModel/login_viewNodel.dart';
+import 'package:movies/features/auth/ui/cubit/login_cubit.dart';
+import 'package:movies/features/auth/ui/cubit/states/login_state.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
@@ -19,40 +23,41 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.sizeOf(context).height;
     double sizeW = MediaQuery.sizeOf(context).width;
     ThemeData theme = Theme.of(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                Center(
-                  child: Image.asset(
-                    AppAssets.logo,
-                    height: size * 0.12,
-                    fit: .fill,
+    return BlocProvider(
+      create: (context) => LoginCubit(FirebaseAuth.instance),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 16),
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      AppAssets.logo,
+                      height: size * 0.12,
+                      fit: .fill,
+                    ),
                   ),
-                ),
-                SizedBox(height: size * 0.07),
-                BlocBuilder<LoginViewnodel, LoginStates>(
-                  bloc: LoginViewnodel(),
-                  builder: (context, state) => Form(
+                  SizedBox(height: size * 0.07),
+                  Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         CustomTextFormField(
                           hint: AppText.email,
                           icon: AppAssets.svgEmail,
-                          controller: context
-                              .read<LoginViewnodel>()
-                              .emailController,
+                          controller: emailController,
                           validator: (email) =>
                               AppValidators.validateEmail(email: email),
                           // controller: emailController,
@@ -62,9 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hint: AppText.password,
                           icon: AppAssets.svgPassword,
                           suffixIcon: AppAssets.svgEyeOff,
-                          controller: context
-                              .read<LoginViewnodel>()
-                              .passwordController,
+                          controller: passwordController,
                           validator: (password) =>
                               AppValidators.validatePassword(
                                 password: password,
@@ -80,33 +83,77 @@ class _LoginScreenState extends State<LoginScreen> {
                                 AppText.forgetPassword,
                                 style: theme.textTheme.displaySmall,
                               ),
+                              onTap: () => Navigator.push(
+                                context,
+                                AppRoutes.forgetPasswordScreen(),
+                              ),
                             ),
                           ],
                         ),
                         SizedBox(height: size * 0.02),
-                        BlocBuilder<LoginViewnodel, LoginStates>(
-                          bloc: LoginViewnodel(),
+                        BlocConsumer<LoginCubit, LoginState>(
+                          listener: (context, state) {
+                            if (state.errorMessage != null &&
+                                state.isLoading == false &&
+                                state.isSuccess == false) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    state.errorMessage,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: AppColor.red,
+                                  behavior: SnackBarBehavior.floating,
+                                  width: 300,
+                                ),
+                              );
+                            }
+                            if (state.isSuccess) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    textAlign: TextAlign.center,
+                                    "Success",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: AppColor.green,
+                                  behavior: SnackBarBehavior.floating,
+                                  width: 300,
+                                ),
+                              );
+                              // Navigator.pushReplacement(context, )
+                            }
+                          },
                           builder: (context, state) {
                             return MainButton(
                               label: state.isLoading
-                                  ? Text(
+                                  ? Center(
+                                      child: const CircularProgressIndicator(
+                                        color: AppColor.white,
+                                      ),
+                                    )
+                                  : Text(
                                       "Login",
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
                                         color: theme.colorScheme.secondary,
                                       ),
-                                    )
-                                  : Center(
-                                      child: const CircularProgressIndicator(),
                                     ),
                               buttonBg: theme.colorScheme.primary,
                               buttonFg: theme.colorScheme.secondary,
-                              onPressed: () {
-                                state.isLoading
-                                    ? LoginViewnodel().login()
-                                    : null;
-                              },
+                              onPressed: state.isLoading
+                                  ? null
+                                  : () {
+                                      debugPrint("1 Tapped");
+                                      if (!_formKey.currentState!.validate())
+                                        return;
+                                      debugPrint("Validated");
+                                      context.read<LoginCubit>().login(
+                                        email: emailController.text.trim(),
+                                        password: passwordController.text,
+                                      );
+                                    },
                             );
                           },
                         ),
@@ -124,6 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               label: Text(
                                 "Create One",
                                 style: theme.textTheme.displaySmall,
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                AppRoutes.registerScreen(),
                               ),
                             ),
                           ],
@@ -157,20 +208,55 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         SizedBox(height: size * 0.04),
-                        BlocBuilder<LoginViewnodel, LoginStates>(
-                          bloc: LoginViewnodel(),
+                        BlocConsumer<LoginCubit, LoginState>(
+                          listener: (context, state) {
+                            if (state.errorMessage != null &&
+                                state.isLoading == false &&
+                                state.isSuccess == false) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    state.errorMessage,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: AppColor.red,
+                                  behavior: SnackBarBehavior.floating,
+                                  width: 300,
+                                ),
+                              );
+                            }
+                            if (state.isSuccess) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    textAlign: TextAlign.center,
+                                    "Success",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: AppColor.green,
+                                  behavior: SnackBarBehavior.floating,
+                                  width: 300,
+                                ),
+                              );
+                              // Navigator.pushReplacement(context, )
+                            }
+                          },
                           builder: (context, state) => MainButton(
-                            onPressed: () {
-                              state.isLoading
-                                  ? LoginViewnodel().LoginWithGoogle()
-                                  : Center(
-                                      child: const CircularProgressIndicator(),
-                                    );
-                            },
+                            onPressed: state.isLoading
+                                ? null
+                                : () {
+                                    context
+                                        .read<LoginCubit>()
+                                        .LoginWithGoogle();
+                                  },
+
                             buttonBg: theme.colorScheme.primary,
                             buttonFg: theme.colorScheme.secondary,
                             label: state.isLoading
-                                ? Row(
+                                ? Center(
+                                    child: const CircularProgressIndicator(),
+                                  )
+                                : Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       SvgPicture.asset(
@@ -189,17 +275,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         style: theme.textTheme.titleMedium,
                                       ),
                                     ],
-                                  )
-                                : Center(
-                                    child: const CircularProgressIndicator(),
                                   ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
