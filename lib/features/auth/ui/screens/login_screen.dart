@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/app_theme.dart';
 import 'package:movies/core/utilis/app_validators.dart';
+import 'package:movies/features/auth/ui/viewModel/login_viewNodel.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
@@ -38,127 +40,163 @@ class _LoginScreenState extends State<LoginScreen> {
                     fit: .fill,
                   ),
                 ),
-
                 SizedBox(height: size * 0.07),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      CustomTextFormField(
-                        hint: AppText.email,
-                        icon: AppAssets.svgEmail,
-                        validator: (email) =>
-                            AppValidators.validateEmail(email: email),
-                        // controller: emailController,
-                      ),
-                      SizedBox(height: size * 0.02),
-                      CustomTextFormField(
-                        hint: AppText.password,
-                        icon: AppAssets.svgPassword,
-                        suffixIcon: AppAssets.svgEyeOff,
-                        validator: (password) =>
-                            AppValidators.validatePassword(password: password),
-                        // controller: passwordController,
-                      ),
-                      SizedBox(height: size * 0.001),
-                      Row(
-                        mainAxisAlignment: .end,
-                        children: [
-                          CustomTextButton(
-                            label: Text(
-                              AppText.forgetPassword,
-                              style: theme.textTheme.displaySmall,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size * 0.02),
-                      MainButton(
-                        label: Text(
-                          "Login",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: theme.colorScheme.secondary,
-                          ),
+                BlocBuilder<LoginViewnodel, LoginStates>(
+                  bloc: LoginViewnodel(),
+                  builder: (context, state) => Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          hint: AppText.email,
+                          icon: AppAssets.svgEmail,
+                          controller: context
+                              .read<LoginViewnodel>()
+                              .emailController,
+                          validator: (email) =>
+                              AppValidators.validateEmail(email: email),
+                          // controller: emailController,
                         ),
-                        buttonBg: theme.colorScheme.primary,
-                        buttonFg: theme.colorScheme.secondary,
-                        onPressed: () {},
-                      ),
-                      SizedBox(height: size * 0.02),
-                      Row(
-                        mainAxisAlignment: .center,
-                        children: [
-                          Text(
-                            AppText.noAccount,
-                            style: theme.textTheme.labelSmall!.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                          ),
-                          CustomTextButton(
-                            label: Text(
-                              "Create One",
-                              style: theme.textTheme.displaySmall,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size * 0.02),
-                      Row(
-                        mainAxisAlignment: .spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              indent: sizeW * 0.04,
-                              endIndent: sizeW * 0.04,
-                              color: theme.colorScheme.primary,
-                              thickness: 1,
-                            ),
-                          ),
-                          Text(
-                            "OR",
-                            style: theme.textTheme.bodyMedium!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              indent: sizeW * 0.04,
-                              endIndent: sizeW * 0.04,
-                              color: theme.colorScheme.primary,
-                              thickness: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size * 0.04),
-                      MainButton(
-                        onPressed: () {},
-                        buttonBg: theme.colorScheme.primary,
-                        buttonFg: theme.colorScheme.secondary,
-                        label: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(
-                              AppAssets.svgGoogle,
-                              fit: BoxFit.scaleDown,
-                              colorFilter: ColorFilter.mode(
-                                theme.colorScheme.secondary,
-                                BlendMode.srcIn,
+                        SizedBox(height: size * 0.02),
+                        CustomTextFormField(
+                          hint: AppText.password,
+                          icon: AppAssets.svgPassword,
+                          suffixIcon: AppAssets.svgEyeOff,
+                          controller: context
+                              .read<LoginViewnodel>()
+                              .passwordController,
+                          validator: (password) =>
+                              AppValidators.validatePassword(
+                                password: password,
                               ),
-                              height: 24,
-                              width: 24,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              "Login with Google",
-                              style: theme.textTheme.titleMedium,
+                          // controller: passwordController,
+                        ),
+                        SizedBox(height: size * 0.001),
+                        Row(
+                          mainAxisAlignment: .end,
+                          children: [
+                            CustomTextButton(
+                              label: Text(
+                                AppText.forgetPassword,
+                                style: theme.textTheme.displaySmall,
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(height: size * 0.02),
+                        BlocBuilder<LoginViewnodel, LoginStates>(
+                          bloc: LoginViewnodel(),
+                          builder: (context, state) {
+                            return MainButton(
+                              label: state.isLoading
+                                  ? Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: theme.colorScheme.secondary,
+                                      ),
+                                    )
+                                  : Center(
+                                      child: const CircularProgressIndicator(),
+                                    ),
+                              buttonBg: theme.colorScheme.primary,
+                              buttonFg: theme.colorScheme.secondary,
+                              onPressed: () {
+                                state.isLoading
+                                    ? LoginViewnodel().login()
+                                    : null;
+                              },
+                            );
+                          },
+                        ),
+                        SizedBox(height: size * 0.02),
+                        Row(
+                          mainAxisAlignment: .center,
+                          children: [
+                            Text(
+                              AppText.noAccount,
+                              style: theme.textTheme.labelSmall!.copyWith(
+                                color: theme.colorScheme.secondary,
+                              ),
+                            ),
+                            CustomTextButton(
+                              label: Text(
+                                "Create One",
+                                style: theme.textTheme.displaySmall,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size * 0.02),
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                indent: sizeW * 0.04,
+                                endIndent: sizeW * 0.04,
+                                color: theme.colorScheme.primary,
+                                thickness: 1,
+                              ),
+                            ),
+                            Text(
+                              "OR",
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                indent: sizeW * 0.04,
+                                endIndent: sizeW * 0.04,
+                                color: theme.colorScheme.primary,
+                                thickness: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size * 0.04),
+                        BlocBuilder<LoginViewnodel, LoginStates>(
+                          bloc: LoginViewnodel(),
+                          builder: (context, state) => MainButton(
+                            onPressed: () {
+                              state.isLoading
+                                  ? LoginViewnodel().LoginWithGoogle()
+                                  : Center(
+                                      child: const CircularProgressIndicator(),
+                                    );
+                            },
+                            buttonBg: theme.colorScheme.primary,
+                            buttonFg: theme.colorScheme.secondary,
+                            label: state.isLoading
+                                ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SvgPicture.asset(
+                                        AppAssets.svgGoogle,
+                                        fit: BoxFit.scaleDown,
+                                        colorFilter: ColorFilter.mode(
+                                          theme.colorScheme.secondary,
+                                          BlendMode.srcIn,
+                                        ),
+                                        height: 24,
+                                        width: 24,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        "Login with Google",
+                                        style: theme.textTheme.titleMedium,
+                                      ),
+                                    ],
+                                  )
+                                : Center(
+                                    child: const CircularProgressIndicator(),
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
