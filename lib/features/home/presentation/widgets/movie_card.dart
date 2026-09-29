@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/constants/routes/app_routes.dart';
+import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/home/domain/entities/movie.dart';
+
 class MovieCard extends StatelessWidget {
   final MovieEntity movie;
   final double height;
@@ -18,18 +20,28 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final posterUrl = movie.largeCoverImage ??
+    final posterUrl =
+        movie.largeCoverImage ??
         movie.mediumCoverImage ??
         movie.smallCoverImage ??
         '';
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
-      onTap: onTap ??
-              () {
+      onTap:
+          onTap ??
+          () {
             Navigator.push(
               context,
-              AppRoutes.movieDetailsScreen());
+              AppRoutes.moviesDetailsScreen(
+                movie: Movie(
+                  id: movie.id,
+                  backgroundImageOriginal: movie.backgroundImage,
+                  rating: movie.rating,
+                  summary: movie.summary,
+                ),
+              ),
+            );
           },
       child: Container(
         width: width,
@@ -84,15 +96,14 @@ class MovieCard extends StatelessWidget {
                 top: 8,
                 left: 8,
                 child: Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.black,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.white,
-                      width: 0.5,
-                    ),
+                    border: Border.all(color: AppColors.white, width: 0.5),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -106,11 +117,7 @@ class MovieCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 3),
-                      const Icon(
-                        Icons.star,
-                        color: AppColors.yellow,
-                        size: 13,
-                      ),
+                      const Icon(Icons.star, color: AppColors.yellow, size: 13),
                     ],
                   ),
                 ),
