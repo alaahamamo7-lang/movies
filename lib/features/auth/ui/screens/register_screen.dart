@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_color.dart';
+import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/utilis/app_validators.dart';
 import 'package:movies/features/auth/ui/cubit/register_cubit.dart';
 import 'package:movies/features/auth/ui/cubit/states/register_state.dart';
@@ -55,7 +56,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             icon: Icon(Icons.arrow_back, color: Color(0xffFFBB3B)),
           ),
           backgroundColor: Color(0xff121312),
-          title: Text("Register", style: TextStyle(color: Color(0xffFFBB3B))),
+          title: Text(
+            AppText.register,
+            style: TextStyle(color: Color(0xffFFBB3B)),
+          ),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -69,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
-                    hintText: "name",
+                    hintText: AppText.name,
                     // suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.nameIcon,
                     isPassword: false,
@@ -79,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 24),
                   CustomTextFormField(
-                    hintText: "email",
+                    hintText: AppText.email,
                     prefixIcon: AppAssets.emailIcon,
                     isPassword: false,
                     maxLines: 1,
@@ -92,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   const SizedBox(height: 24),
                   CustomTextFormField(
-                    hintText: "password",
+                    hintText: AppText.password,
                     prefixIcon: AppAssets.passwordIcon,
                     isPassword: true,
                     maxLines: 1,
@@ -108,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
-                    hintText: "confirm password",
+                    hintText: AppText.confirmPassword,
                     suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.passwordIcon,
                     isPassword: true,
@@ -123,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.next,
-                    hintText: "phone number",
+                    hintText: AppText.phoneNumber,
                     // suffixIcon: Icon(Icons.visibility),
                     prefixIcon: AppAssets.phoneIcon,
                     isPassword: false,
@@ -154,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           SnackBar(
                             content: Text(
                               textAlign: TextAlign.center,
-                              "Account Created Successfully",
+                              AppText.accountCreatedSuccessfully,
                               style: TextStyle(color: Colors.white),
                             ),
                             backgroundColor: AppColor.green,
@@ -194,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 )
                               : Text(
-                                  "Create Account",
+                                  AppText.createAccount,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -210,13 +214,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have Account ?",
+                        AppText.alreadyHaveAccount,
                         style: TextStyle(color: Colors.white),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text(
-                          "Login",
+                          AppText.login,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: Color(0xffF6BD00),

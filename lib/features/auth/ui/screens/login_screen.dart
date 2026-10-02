@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     )
                                   : Text(
-                                      "Login",
+                                      AppText.login,
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
@@ -145,10 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: state.isLoading
                                   ? null
                                   : () {
-                                      debugPrint("1 Tapped");
+                                      // debugPrint("1 Tapped");
                                       if (!_formKey.currentState!.validate())
                                         return;
-                                      debugPrint("Validated");
+                                      // debugPrint("Validated");
                                       context.read<LoginCubit>().login(
                                         email: emailController.text.trim(),
                                         password: passwordController.text,
@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             CustomTextButton(
                               label: Text(
-                                "Create One",
+                                AppText.createAccount,
                                 style: theme.textTheme.displaySmall,
                               ),
                               onTap: () => Navigator.push(
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             Text(
-                              "OR",
+                              AppText.or,
                               style: theme.textTheme.bodyMedium!.copyWith(
                                 color: theme.colorScheme.primary,
                               ),
@@ -230,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SnackBar(
                                   content: Text(
                                     textAlign: TextAlign.center,
-                                    "Success",
+                                    AppText.success,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   backgroundColor: AppColor.green,
@@ -271,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                       SizedBox(width: 8),
                                       Text(
-                                        "Login with Google",
+                                        AppText.loginWithGoogle,
                                         style: theme.textTheme.titleMedium,
                                       ),
                                     ],

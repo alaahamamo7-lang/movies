@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_color.dart';
+import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/utilis/app_validators.dart';
 import 'package:movies/features/auth/ui/cubit/forget_password_cubit.dart';
 import 'package:movies/features/auth/ui/cubit/states/forget_password_state.dart';
@@ -26,7 +27,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         ),
         backgroundColor: Color(0xff121312),
         title: Text(
-          "Forget Password",
+          AppText.forgetPasswordTitle,
           style: TextStyle(color: Color(0xffFFBB3B)),
         ),
         centerTitle: true,
@@ -43,7 +44,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                hintText: "Enter your email",
+                hintText: AppText.enterYourEmail,
                 prefixIcon: AppAssets.emailIcon,
                 validator: (email) => AppValidators.validateEmail(),
               ),
@@ -69,7 +70,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'If an account exists, a reset link was sent.',
+                          AppText.ifAnAccountExists,
                           textAlign: TextAlign.center,
                         ),
                         backgroundColor: AppColor.green,
@@ -98,7 +99,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "Verify Email",
+                        AppText.verifyEmail,
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
