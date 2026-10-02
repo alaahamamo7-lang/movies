@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/core/constants/app_theme.dart';
 import 'package:movies/features/auth/ui/screens/login_screen.dart';
 import 'package:movies/features/movies_details/ui/screen/movies_details_screen.dart';
+import 'package:movies/features/onboarding/ui/screen/onboarding_screen.dart';
 import 'package:movies/features/update_profile/ui/update_profile.dart';
 import 'package:movies/features/ui/splash_screen.dart';
 

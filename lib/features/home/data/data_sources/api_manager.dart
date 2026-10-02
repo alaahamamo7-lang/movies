@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
 
 class ApiManager {
   static const String _baseUrl = 'https://yts.gg/api/v2';
   static const String _moviesEndpoint = '/list_movies.json';
+  static const String errorMessage = AppText.errorMessage;
 
   static final Dio _dio = Dio(
     BaseOptions(
@@ -30,7 +32,8 @@ class ApiManager {
     if (limit != null) params['limit'] = limit;
     if (quality != null && quality.isNotEmpty) params['quality'] = quality;
     if (minimumRating != null) params['minimum_rating'] = minimumRating;
-    if (queryTerm != null && queryTerm.isNotEmpty) params['query_term'] = queryTerm;
+    if (queryTerm != null && queryTerm.isNotEmpty)
+      params['query_term'] = queryTerm;
     if (genre != null && genre.isNotEmpty) params['genre'] = genre;
     if (sortBy != null && sortBy.isNotEmpty) params['sort_by'] = sortBy;
     if (orderBy != null && orderBy.isNotEmpty) params['order_by'] = orderBy;
@@ -49,5 +52,34 @@ class ApiManager {
     } on DioException catch (e) {
       throw Exception('Network error: ${e.message}');
     }
+  }
+
+  static Future<Movie> loadMovieDetails(int movieId) async {
+    final response = await _dio.get(
+      "/movie_details.json",
+      queryParameters: {"movie_id": movieId},
+    );
+    final movieJson = response.data?['data']?['movie'];
+    if (movieJson is! Map<String, dynamic>) {
+      throw Exception("Unexpected response shape: ${response.data}");
+    }
+    return Movie.fromJson(movieJson);
+  }
+
+  static Future<List<Movie>> loadMovieSuggestions(int movieId) async {
+    final response = await _dio.get(
+      "/movie_suggestions.json",
+      queryParameters: {"movie_id": movieId},
+    );
+
+    final moviesJson = response.data?['data']?['movies'];
+    if (moviesJson is! List) {
+      throw Exception("Unexpected response shape: ${response.data}");
+    }
+
+    return moviesJson
+        .whereType<Map<String, dynamic>>()
+        .map(Movie.fromJson)
+        .toList();
   }
 }

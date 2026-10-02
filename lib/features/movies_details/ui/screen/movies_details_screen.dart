@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/constants/app_color.dart';
+import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/routes/app_routes.dart';
-import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
 import 'package:movies/features/home/data/data_sources/api_manager.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
-import 'package:movies/features/home/domain/entities/movie.dart';
-import 'package:movies/features/movies_details/data/api_manager.dart';
-import 'package:movies/features/movies_details/ui/widget/card_widget.dart';
 import 'package:movies/features/movies_details/ui/widget/custom_filled_button.dart';
 
 class MoviesDetailsScreen extends StatefulWidget {
@@ -25,10 +21,8 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    _future = MovieDetailsApiManager.loadMovieDetails(widget.movie.id!);
-    _suggestionsFuture = MovieDetailsApiManager.loadMovieSuggestions(
-      widget.movie.id!,
-    );
+    _future = ApiManager.loadMovieDetails(widget.movie.id!);
+    _suggestionsFuture = ApiManager.loadMovieSuggestions(widget.movie.id!);
   }
 
   @override
@@ -36,7 +30,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
     return SafeArea(
       child: Scaffold(
         body: FutureBuilder(
-          future: MovieDetailsApiManager.loadMovieDetails(widget.movie.id!),
+          future: ApiManager.loadMovieDetails(widget.movie.id!),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
@@ -113,7 +107,10 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        CustomFilledButton(labelText: "Watch", onTap: () {}),
+                        CustomFilledButton(
+                          labelText: AppText.watch,
+                          onTap: () {},
+                        ),
                         const SizedBox(height: 16),
                       ],
                     ),
@@ -202,7 +199,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "ScreenShoots",
+                          AppText.screenShoots,
                           style: TextStyle(
                             color: AppColor.white,
                             fontWeight: .w700,
@@ -225,7 +222,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "Similar",
+                          AppText.similarMovies,
                           style: TextStyle(
                             color: AppColor.white,
                             fontWeight: .w700,
@@ -244,7 +241,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                             }
                             if (snapshot.hasError) {
                               return Text(
-                                'Failed to load suggestions: ${snapshot.error}',
+                                '${AppText.failedToLoadSuggestions} ${snapshot.error}',
                               );
                             }
                             final movies = snapshot.data ?? [];
@@ -289,7 +286,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "Summary",
+                          AppText.summary,
                           style: TextStyle(
                             color: AppColors.white,
                             fontWeight: .w700,
@@ -304,34 +301,9 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                             fontSize: 16,
                           ),
                         ),
-                        // const SizedBox(height: 8),
-                        // Text(
-                        //   "Cast",
-                        //   style: TextStyle(
-                        //     color: AppColors.white,
-                        //     fontWeight: .w700,
-                        //     fontSize: 24,
-                        //   ),
-                        // ),
-                        // ListView.separated(
-                        //   shrinkWrap: true,
-                        //   physics: const NeverScrollableScrollPhysics(),
-                        //   itemBuilder: (context, index) => Container(
-                        //     width: double.infinity,
-                        //     height: 50,
-                        //     decoration: BoxDecoration(
-                        //       color: AppColor.second,
-                        //       borderRadius: BorderRadius.circular(16),
-                        //     ),
-                        //     child: Text('${snapshot.data!}'),
-                        //   ),
-                        //   separatorBuilder: (context, index) =>
-                        //       const SizedBox(height: 8),
-                        //   itemCount: 3,
-                        // ),
                         const SizedBox(height: 8),
                         Text(
-                          "Geners",
+                          AppText.genres,
                           style: TextStyle(
                             color: AppColors.white,
                             fontWeight: .w700,
