@@ -30,11 +30,7 @@ class Movies extends StatelessWidget {
 
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
-      // routes: {
-      //   LoginScreen.routeName: (context) => LoginScreen(),
-      //   SplashScreen.routeName: (_) => const SplashScreen(),
-      //   UpdateProfileScreen.routeName: (context) => UpdateProfileScreen(),
-      // },
+
       home: const SplashScreen(),
     );
   }
