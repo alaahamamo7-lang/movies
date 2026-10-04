@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:movies/core/constants/routes/app_routes.dart';
-import 'package:movies/features/auth/ui/screens/login_screen.dart';
-
 class OnBoardingScreenData {
   final String imagePath;
   final String title;
