@@ -150,6 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         return;
                                       // debugPrint("Validated");
                                       context.read<LoginCubit>().login(
+                                        context: context,
                                         email: emailController.text.trim(),
                                         password: passwordController.text,
                                       );
@@ -245,9 +246,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: state.isLoading
                                 ? null
                                 : () {
-                                    context
-                                        .read<LoginCubit>()
-                                        .LoginWithGoogle();
+                                    context.read<LoginCubit>().LoginWithGoogle(
+                                      context,
+                                    );
                                   },
 
                             buttonBg: theme.colorScheme.primary,
