@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:movies/core/constants/routes/app_routes.dart';
-import 'package:movies/features/auth/ui/screens/login_screen.dart';
 
 class OnBoardingScreenData {
   final String imagePath;
@@ -55,31 +52,3 @@ final List<OnBoardingScreenData> pages = [
   ),
 ];
 
-class OnBoardingController {
-  final PageController pageController = PageController();
-  int currentPage = 0;
-
-  void nextPage(BuildContext context) {
-    if (currentPage < pages.length - 1) {
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      Navigator.pushReplacement(context, AppRoutes.loginScreen());
-    }
-  }
-
-  void prevPage() {
-    if (currentPage > 0) {
-      pageController.previousPage(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
-  void dispose() {
-    pageController.dispose();
-  }
-}
