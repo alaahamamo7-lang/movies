@@ -1,4 +1,3 @@
-
 class OnBoardingScreenData {
   final String imagePath;
   final String title;
@@ -46,9 +45,8 @@ final List<OnBoardingScreenData> pages = [
         "Share your thoughts on the movies you've watched.Dive deep into film details and help others discover great movies with your reviews.",
   ),
   OnBoardingScreenData(
-    imagePath: 'assets/onboarding_5.png',
+    imagePath: 'assets/onboarding_6.png',
     title: 'Start Watching Now',
     subtitle: '',
   ),
 ];
-
