@@ -1,15 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/core/constants/app_theme.dart';
-import 'package:movies/features/auth/ui/screens/login_screen.dart';
-import 'package:movies/features/movies_details/ui/screen/movies_details_screen.dart';
-import 'package:movies/features/onboarding/ui/screen/onboarding_screen.dart';
-import 'package:movies/features/update_profile/ui/update_profile.dart';
-import 'package:movies/features/ui/splash_screen.dart';
 
-import 'features/home/presentation/screens/home_screen.dart';
+import 'package:movies/features/onboarding/ui/screen/onboarding_screen.dart';
+
 import 'package:movies/firebase_options.dart';
 
 void main() async {
@@ -31,7 +26,7 @@ class Movies extends StatelessWidget {
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
 
-      home: const SplashScreen(),
+      home: const OnBoardingScreen(),
     );
   }
 }

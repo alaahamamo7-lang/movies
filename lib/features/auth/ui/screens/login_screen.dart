@@ -5,18 +5,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/core/constants/app_text.dart';
-import 'package:movies/core/constants/app_theme.dart';
+
 import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/core/utilis/app_validators.dart';
 import 'package:movies/features/auth/ui/cubit/login_cubit.dart';
 import 'package:movies/features/auth/ui/cubit/states/login_state.dart';
+
 import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const String routeName = "/loginScreen";
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
