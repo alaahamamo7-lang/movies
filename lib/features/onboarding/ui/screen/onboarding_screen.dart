@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
-import 'package:movies/features/onboarding/controller/onboarding_model_logic.dart';
+import 'package:movies/features/onboarding/model/onboarding_model_logic.dart';
 import 'package:movies/features/onboarding/ui/widgets/onboarding_page_item.dart';
-
+import 'package:movies/core/constants/routes/app_routes.dart';
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -11,11 +11,32 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  final OnBoardingController controller = OnBoardingController();
+  final PageController pageController = PageController();
+  int currentPage = 0;
+
+  void nextPage() {
+    if (currentPage < pages.length - 1) {
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      Navigator.pushReplacement(context, AppRoutes.loginScreen());
+    }
+  }
+
+  void prevPage() {
+    if (currentPage > 0) {
+      pageController.previousPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   void dispose() {
-    controller.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -26,10 +47,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Stack(
         children: [
           PageView.builder(
-            controller: controller.pageController,
+            controller: pageController,
             onPageChanged: (index) {
               setState(() {
-                controller.currentPage = index;
+                currentPage = index;
               });
             },
             itemCount: pages.length,
@@ -51,7 +72,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    pages[controller.currentPage].title,
+                    pages[currentPage].title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: AppColors.white,
@@ -61,9 +82,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  if (pages[controller.currentPage].subtitle.isNotEmpty) ...[
+                  if (pages[currentPage].subtitle.isNotEmpty) ...[
                     Text(
-                      pages[controller.currentPage].subtitle,
+                      pages[currentPage].subtitle,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: AppColors.white,
@@ -74,7 +95,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     const SizedBox(height: 28),
                   ],
                   InkWell(
-                    onTap: () => controller.nextPage(context),
+                    onTap: nextPage,
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -84,9 +105,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          controller.currentPage == pages.length - 1
-                              ? 'Finish'
-                              : 'Next',
+                          currentPage == pages.length - 1 ? 'Finish' : 'Next',
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -97,9 +116,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  if (controller.currentPage > 0)
+                  if (currentPage > 0)
                     InkWell(
-                      onTap: controller.prevPage,
+                      onTap: prevPage,
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 16),

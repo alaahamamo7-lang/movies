@@ -4,12 +4,16 @@ import 'package:flutter_svg/svg.dart';
 class CustomTextFormField extends StatelessWidget {
   final String hint;
   final String icon;
-  String? suffixIcon;
+  final FormFieldValidator<String>? validator;
+  final TextEditingController? controller;
+  final String? suffixIcon;
   CustomTextFormField({
     super.key,
     required this.hint,
     required this.icon,
     this.suffixIcon,
+    this.validator,
+    this.controller,
   });
 
   @override
@@ -17,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
     Size size = MediaQuery.sizeOf(context);
     ThemeData theme = Theme.of(context);
     return TextFormField(
+      controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         suffixIcon: suffixIcon == null
             ? null
