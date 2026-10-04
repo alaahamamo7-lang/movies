@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/constants/app_text.dart';
+import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/core/service/firebase_service.dart';
 import 'package:movies/features/auth/ui/cubit/states/login_state.dart';
 
@@ -9,7 +10,11 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._auth) : super(LoginState(isLoading: false));
   final FirebaseAuth _auth;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     try {
       // print("Login() Called");
       emit(LoginState(isLoading: true));
@@ -19,6 +24,9 @@ class LoginCubit extends Cubit<LoginState> {
           .timeout(const Duration(seconds: 15));
       // print("Account Found");
       emit(LoginState(isSuccess: true));
+      if (context.mounted) {
+        Navigator.pushReplacement(context, AppRoutes.homeScreen());
+      }
     } catch (e) {
       // print("CAUGHT: ${e.runtimeType} | $e");
 
@@ -54,11 +62,14 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> LoginWithGoogle() async {
+  Future<void> LoginWithGoogle(BuildContext context) async {
     try {
       emit(LoginState(isLoading: true));
       await FirebaseService().signInWithGoogle();
       emit(LoginState(isLoading: false, isSuccess: true));
+      if (context.mounted) {
+        Navigator.pushReplacement(context, AppRoutes.homeScreen());
+      }
     } on Exception catch (e) {
       emit(
         LoginState(

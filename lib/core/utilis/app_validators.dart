@@ -59,8 +59,8 @@ abstract class AppValidators {
     if (phone == null || phone.isEmpty) {
       return 'Phone number is required';
     }
-    final cleaned = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-    if (!RegExp(r'^\+?[1-9]\d{6,14}$').hasMatch(cleaned)) {
+    // final cleaned = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
+    if (!RegExp(r'^\+?[0-9]\d{6,14}$').hasMatch(phone)) {
       return 'Enter a valid phone number';
     }
     return null;

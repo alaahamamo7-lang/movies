@@ -31,21 +31,12 @@ class RegisterCubit extends Cubit<RegisterState> {
   }) async {
     try {
       emit(RegisterState(isLoading: true, isSuccess: false));
-      // debugPrint('email="${email}" len=${email.length}');
-      // debugPrint('controller hash=${email.hashCode}');
-      // debugPrint(
-      //   'SENDING email="$email" len=${email.length} pw_len=${password.length}',
-      // );
-      // final cred = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       await FirebaseService().createAccount(email: email, password: password);
-      // debugPrint('probe OK: ${probe.user?.uid}');
-      // if (context.mounted) {
-      //   Navigator.pushReplacement(context, AppRoutes.loginScreen());
-      // }
+      if (context.mounted) {
+        Navigator.pushReplacement(context, AppRoutes.loginScreen());
+      }
       emit(RegisterState(isLoading: false, isSuccess: true));
     } catch (e) {
-      // debugPrint('EMPTY-EMAIL RESULT: ${e.runtimeType} | $e');
-      // print("error:${e.toString()}");
       emit(
         RegisterState(
           isLoading: false,
@@ -53,26 +44,6 @@ class RegisterCubit extends Cubit<RegisterState> {
           isSuccess: false,
         ),
       );
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(e.toString(), textAlign: TextAlign.center),
-      //     backgroundColor: AppColor.red,
-      //     behavior: SnackBarBehavior.floating,
-      //     width: 300,
-      //   ),
-      // );
-    }
-  }
-
-  Future<void> signInWithGoogle() async {
-    try {
-      emit(RegisterState(isLoading: true));
-      final result = await FirebaseService().signInWithGoogle();
-      // print("Account Created Successfully");
-      // emit(RegisterState(isLoading: false));
-    } catch (e) {
-      print(e.toString());
-      emit(RegisterState(isLoading: false, errorMessage: e.toString()));
     }
   }
 }
