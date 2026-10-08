@@ -3,7 +3,8 @@ import 'package:movies/features/auth/ui/screens/forget_password_screen.dart';
 import 'package:movies/features/auth/ui/screens/login_screen.dart';
 import 'package:movies/features/auth/ui/screens/register_screen.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
-import 'package:movies/features/home/presentation/screens/home_screen.dart';
+import 'package:movies/features/home/home_screen/home_screen.dart';
+import 'package:movies/features/home/presentation/tabs/home_tab/ui/home_tab.dart';
 
 import 'package:movies/features/home/presentation/screens/see_more_screen.dart';
 import 'package:movies/features/movies_details/ui/screen/movies_details_screen.dart';

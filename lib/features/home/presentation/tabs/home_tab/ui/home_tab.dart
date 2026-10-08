@@ -8,8 +8,8 @@ import 'package:movies/features/home/presentation/widgets/category_movies_sectio
 import 'package:movies/features/home/presentation/widgets/home_dynamic_background.dart';
 import 'package:movies/features/home/presentation/widgets/watch_now_header.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeTab extends StatelessWidget {
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,7 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is HomeLoadingState) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.yellow,
-                ),
+                child: CircularProgressIndicator(color: AppColors.yellow),
               );
             }
 
@@ -72,8 +70,10 @@ class HomeScreen extends StatelessWidget {
               final availableMovies = state.availableMovies;
               final categories = state.categories;
               final currentMovie = availableMovies.isNotEmpty
-                  ? availableMovies[state.currentCarouselIndex
-                  .clamp(0, availableMovies.length - 1)]
+                  ? availableMovies[state.currentCarouselIndex.clamp(
+                      0,
+                      availableMovies.length - 1,
+                    )]
                   : null;
 
               return Stack(
@@ -88,14 +88,14 @@ class HomeScreen extends StatelessWidget {
                           AvailableMoviesSection(
                             movies: availableMovies,
                             onPageChanged: (index) {
-                              context
-                                  .read<HomeCubit>()
-                                  .updateCarouselIndex(index);
+                              context.read<HomeCubit>().updateCarouselIndex(
+                                index,
+                              );
                             },
                           ),
                           const WatchNowHeader(),
                           ...categories.map(
-                                (cat) => CategoryMoviesSection(category: cat),
+                            (cat) => CategoryMoviesSection(category: cat),
                           ),
                           const SizedBox(height: 32),
                         ],
