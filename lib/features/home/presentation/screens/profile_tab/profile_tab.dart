@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_color.dart';
+import 'package:movies/features/home/presentation/widgets/profile_header.dart';
 
 class ProfileTab extends StatelessWidget {
-  const ProfileTab({super.key});
+  ProfileTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Profile", style: TextStyle(color: AppColor.white)),
-    );
+    Size size = MediaQuery.sizeOf(context);
+    ThemeData theme = Theme.of(context);
+    return Scaffold(body: Column(children: [ProfileHeader()]));
   }
 }

@@ -29,6 +29,11 @@ abstract final class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.w700,
       ),
+      displayLarge: TextStyle(
+        color: AppColor.white,
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+      ),
       displayMedium: TextStyle(
         color: AppColor.white,
         fontSize: 16,

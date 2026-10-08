@@ -14,6 +14,8 @@ abstract final class AppAssets {
   static const String svgSearch = "assets/icons/search.svg";
   static const String svgExplore = "assets/icons/explore.svg";
   static const String svgProfile = "assets/icons/profiel.svg";
+  static const String svgList = "assets/icons/list.svg";
+  static const String svgFolder = "assets/icons/Folder.svg";
   //--------------------------------------------------------------------
   static const String avatar1 = "assets/images/avatar1.png";
   static const String avatar2 = "assets/images/avatar2.png";

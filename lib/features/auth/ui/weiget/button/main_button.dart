@@ -1,17 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movies/core/constants/app_assets.dart';
 
 class MainButton extends StatelessWidget {
   final Widget label;
   final Color buttonBg;
   final Color buttonFg;
   final void Function()? onPressed;
+  final Widget? icon;
   const MainButton({
     super.key,
     required this.label,
     required this.buttonBg,
     required this.buttonFg,
     this.onPressed,
+    this.icon,
   });
 
   @override
@@ -24,7 +28,14 @@ class MainButton extends StatelessWidget {
         foregroundColor: buttonFg,
         borderRadius: BorderRadius.circular(16),
         onPressed: onPressed,
-        child: Center(child: label),
+        child: icon == null
+            ? Center(child: label)
+            : Center(
+                child: Row(
+                  mainAxisAlignment: .center,
+                  children: [label, icon!],
+                ),
+              ),
       ),
     );
   }
