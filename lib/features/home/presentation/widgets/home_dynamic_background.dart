@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/constants/app_color.dart';
+
 import 'package:movies/features/home/domain/entities/movie.dart';
 
 class HomeDynamicBackground extends StatelessWidget {
@@ -12,7 +13,8 @@ class HomeDynamicBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     if (movie == null) return const SizedBox.shrink();
 
-    final String imageUrl = movie!.backgroundImage ??
+    final String imageUrl =
+        movie!.backgroundImage ??
         movie!.largeCoverImage ??
         movie!.mediumCoverImage ??
         '';
@@ -33,9 +35,7 @@ class HomeDynamicBackground extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
-                errorBuilder: (_, __, ___) => Container(
-                  color: AppColors.black,
-                ),
+                errorBuilder: (_, __, ___) => Container(color: AppColor.black),
               ),
             ),
           ),
@@ -46,10 +46,10 @@ class HomeDynamicBackground extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.black,
-                    AppColors.black,
-                    AppColors.black,
-                    AppColors.black,
+                    AppColor.black,
+                    AppColor.black,
+                    AppColor.black,
+                    AppColor.black,
                   ],
                   stops: const [0.0, 0.45, 0.7, 1.0],
                 ),
@@ -59,9 +59,7 @@ class HomeDynamicBackground extends StatelessWidget {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-              child: Container(
-                color: AppColors.black,
-              ),
+              child: Container(color: AppColor.black),
             ),
           ),
         ],

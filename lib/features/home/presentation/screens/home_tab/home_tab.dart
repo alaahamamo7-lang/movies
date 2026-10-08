@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/core/app_colors.dart';
+
+import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/features/home/presentation/cubit/home_cubit.dart';
 import 'package:movies/features/home/presentation/cubit/home_state.dart';
 import 'package:movies/features/home/presentation/widgets/available_movies_section.dart';
@@ -16,12 +17,12 @@ class HomeTab extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit()..getHomeData(),
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColor.black,
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is HomeLoadingState) {
               return const Center(
-                child: CircularProgressIndicator(color: AppColors.yellow),
+                child: CircularProgressIndicator(color: AppColor.yellow),
               );
             }
 
@@ -34,14 +35,14 @@ class HomeTab extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.error_outline,
-                        color: AppColors.red,
+                        color: AppColor.red,
                         size: 60,
                       ),
                       const SizedBox(height: 16),
                       Text(
                         state.errorMessage,
                         style: const TextStyle(
-                          color: AppColors.white,
+                          color: AppColor.white,
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.center,
@@ -49,8 +50,8 @@ class HomeTab extends StatelessWidget {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.yellow,
-                          foregroundColor: AppColors.black,
+                          backgroundColor: AppColor.yellow,
+                          foregroundColor: AppColor.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

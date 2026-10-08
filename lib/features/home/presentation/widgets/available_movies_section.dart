@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/constants/app_color.dart';
+
 import 'package:movies/features/home/domain/entities/movie.dart';
 import 'package:movies/features/home/presentation/widgets/movie_card.dart';
 
@@ -25,14 +26,14 @@ class AvailableMoviesSection extends StatelessWidget {
           child: Text(
             'Available Now',
             style: TextStyle(
-              color: AppColors.white,
+              color: AppColor.white,
               fontSize: 32,
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.italic,
               letterSpacing: 1.2,
               shadows: [
                 Shadow(
-                  color: AppColors.black,
+                  color: AppColor.black,
                   offset: const Offset(0, 3),
                   blurRadius: 8,
                 ),
@@ -54,11 +55,7 @@ class AvailableMoviesSection extends StatelessWidget {
           ),
           itemBuilder: (context, index, realIndex) {
             final movie = movies[index];
-            return MovieCard(
-              movie: movie,
-              height: 330,
-              width: 220,
-            );
+            return MovieCard(movie: movie, height: 330, width: 220);
           },
         ),
       ],

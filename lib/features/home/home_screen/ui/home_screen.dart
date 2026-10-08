@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies/features/home/models/nav_bar_item_model.dart';
-import 'package:movies/features/home/presentation/tabs/explore_tab/ui/screen/explore_tab.dart';
-import 'package:movies/features/home/presentation/tabs/home_tab/ui/home_tab.dart';
-import 'package:movies/features/home/presentation/tabs/profile_tab/ui/screen/profile_tab.dart';
-import 'package:movies/features/home/presentation/tabs/screach_tab/ui/screen/search_tab.dart';
+import 'package:movies/features/home/home_screen/models/nav_bar_item_model.dart';
+import 'package:movies/features/home/presentation/screens/explore_tab/explore_tab.dart';
+import 'package:movies/features/home/presentation/screens/home_tab/home_tab.dart';
+import 'package:movies/features/home/presentation/screens/profile_tab/profile_tab.dart';
+import 'package:movies/features/home/presentation/screens/search_tab/search_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

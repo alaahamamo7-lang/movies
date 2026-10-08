@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+
 import 'package:movies/core/constants/app_color.dart';
 
 class CardWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class CardWidget extends StatelessWidget {
         children: [
           Icon(icon, color: AppColor.primary),
           const SizedBox(width: 8),
-          Text('$text', style: TextStyle(color: AppColors.white)),
+          Text('$text', style: TextStyle(color: AppColor.white)),
         ],
       ),
     );

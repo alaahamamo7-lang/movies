@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+
+import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/features/onboarding/model/onboarding_model_logic.dart';
 import 'package:movies/features/onboarding/ui/widgets/onboarding_page_item.dart';
 import 'package:movies/core/constants/routes/app_routes.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -43,7 +45,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Stack(
         children: [
           PageView.builder(
@@ -63,7 +65,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
-                color: AppColors.black,
+                color: AppColor.black,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               ),
               padding: const EdgeInsets.fromLTRB(24, 28, 24, 32),
@@ -75,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     pages[currentPage].title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: AppColors.white,
+                      color: AppColor.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       height: 1.3,
@@ -87,7 +89,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       pages[currentPage].subtitle,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: AppColors.white,
+                        color: AppColor.white,
                         fontSize: 14,
                         height: 1.6,
                       ),
@@ -100,7 +102,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       decoration: BoxDecoration(
-                        color: AppColors.yellow,
+                        color: AppColor.yellow,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Center(
@@ -109,7 +111,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.black,
+                            color: AppColor.black,
                           ),
                         ),
                       ),
@@ -124,7 +126,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: AppColors.yellow,
+                            color: AppColor.yellow,
                             width: 1.5,
                           ),
                           borderRadius: BorderRadius.circular(16),
@@ -135,7 +137,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.yellow,
+                              color: AppColor.yellow,
                             ),
                           ),
                         ),

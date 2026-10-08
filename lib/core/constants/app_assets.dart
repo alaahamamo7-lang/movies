@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract final class AppAssets {
   static const String logo = "assets/images/logo.png";
   //---------------------------------------
@@ -37,4 +39,5 @@ abstract final class AppAssets {
   static const avatar_1 = "assets/images/avatar_1.png";
   static const avatar_2 = "assets/images/avatar_2.png";
   static const avatar_3 = "assets/images/avatar_3.png";
+  static const placeholder = "assets/images/empty1.png";
 }

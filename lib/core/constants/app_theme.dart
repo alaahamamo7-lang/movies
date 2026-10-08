@@ -24,6 +24,11 @@ abstract final class AppTheme {
       showUnselectedLabels: false,
     ),
     textTheme: TextTheme(
+      headlineLarge: TextStyle(
+        color: AppColor.black,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+      ),
       displayMedium: TextStyle(
         color: AppColor.white,
         fontSize: 16,

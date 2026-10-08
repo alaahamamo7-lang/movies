@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/constants/app_color.dart';
+
 import 'package:movies/features/home/presentation/cubit/see_more_cubit.dart';
 import 'package:movies/features/home/presentation/cubit/see_more_state.dart';
 import 'package:movies/features/home/presentation/widgets/movie_card.dart';
@@ -8,30 +9,27 @@ import 'package:movies/features/home/presentation/widgets/movie_card.dart';
 class SeeMoreScreen extends StatelessWidget {
   final String genre;
 
-  const SeeMoreScreen({
-    super.key,
-    required this.genre,
-  });
+  const SeeMoreScreen({super.key, required this.genre});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SeeMoreCubit()..getGenreMovies(genre),
       child: Scaffold(
-        backgroundColor: AppColors.black,
+        backgroundColor: AppColor.black,
         appBar: AppBar(
-          backgroundColor: AppColors.black,
+          backgroundColor: AppColor.black,
           elevation: 0,
           title: Text(
             '$genre Movies',
             style: const TextStyle(
-              color: AppColors.white,
+              color: AppColor.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.yellow),
+            icon: const Icon(Icons.arrow_back_ios_new, color: AppColor.yellow),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -39,7 +37,7 @@ class SeeMoreScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is SeeMoreLoadingState) {
               return const Center(
-                child: CircularProgressIndicator(color: AppColors.yellow),
+                child: CircularProgressIndicator(color: AppColor.yellow),
               );
             }
 
@@ -52,20 +50,20 @@ class SeeMoreScreen extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.error_outline,
-                        color: AppColors.red,
+                        color: AppColor.red,
                         size: 50,
                       ),
                       const SizedBox(height: 12),
                       Text(
                         state.errorMessage,
-                        style: const TextStyle(color: AppColors.white),
+                        style: const TextStyle(color: AppColor.white),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.yellow,
-                          foregroundColor: AppColors.black,
+                          backgroundColor: AppColor.yellow,
+                          foregroundColor: AppColor.black,
                         ),
                         onPressed: () {
                           context.read<SeeMoreCubit>().getGenreMovies(genre);
@@ -84,13 +82,16 @@ class SeeMoreScreen extends StatelessWidget {
                 return const Center(
                   child: Text(
                     'No movies found for this category.',
-                    style: TextStyle(color: AppColors.white, fontSize: 16),
+                    style: TextStyle(color: AppColor.white, fontSize: 16),
                   ),
                 );
               }
 
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,6 +1,6 @@
 import 'package:movies/core/constants/app_assets.dart';
-import 'package:movies/features/home/widgets/active_nav_bar_item.dart';
-import 'package:movies/features/home/widgets/nav_bar_item.dart';
+import 'package:movies/features/home/presentation/widgets/active_nav_bar_item.dart';
+import 'package:movies/features/home/presentation/widgets/nav_bar_item.dart';
 
 class NavBarItemModel {
   ActiveNavBarItem active;

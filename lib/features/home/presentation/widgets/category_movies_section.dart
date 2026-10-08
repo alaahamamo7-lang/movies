@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/constants/app_color.dart';
+
 import 'package:movies/features/home/presentation/cubit/home_state.dart';
-import 'package:movies/features/home/presentation/screens/see_more_screen.dart';
+import 'package:movies/features/home/presentation/screens/home_tab/see_more_screen.dart';
 import 'package:movies/features/home/presentation/widgets/movie_card.dart';
 
 class CategoryMoviesSection extends StatelessWidget {
   final MovieCategoryItem category;
 
-  const CategoryMoviesSection({
-    super.key,
-    required this.category,
-  });
+  const CategoryMoviesSection({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class CategoryMoviesSection extends StatelessWidget {
               Text(
                 category.genre,
                 style: const TextStyle(
-                  color: AppColors.white,
+                  color: AppColor.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -48,7 +46,7 @@ class CategoryMoviesSection extends StatelessWidget {
                     Text(
                       'See More',
                       style: TextStyle(
-                        color: AppColors.yellow,
+                        color: AppColor.yellow,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
@@ -56,7 +54,7 @@ class CategoryMoviesSection extends StatelessWidget {
                     SizedBox(width: 4),
                     Icon(
                       Icons.arrow_forward_ios,
-                      color: AppColors.yellow,
+                      color: AppColor.yellow,
                       size: 12,
                     ),
                   ],
@@ -76,11 +74,7 @@ class CategoryMoviesSection extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(width: 14),
             itemBuilder: (context, index) {
               final movie = category.movies[index];
-              return MovieCard(
-                movie: movie,
-                height: 190,
-                width: 125,
-              );
+              return MovieCard(movie: movie, height: 190, width: 125);
             },
           ),
         ),

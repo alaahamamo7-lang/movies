@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+
 import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/constants/routes/app_routes.dart';
@@ -35,7 +35,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
             if (snapshot.hasError) {
               return Center(
                 child: Card(
-                  color: AppColors.black,
+                  color: AppColor.black,
                   elevation: 10,
                   margin: const EdgeInsets.all(24),
                   child: Padding(
@@ -137,7 +137,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                               const SizedBox(width: 8),
                               Text(
                                 '${snapshot.data!.mpaRating}',
-                                style: TextStyle(color: AppColors.white),
+                                style: TextStyle(color: AppColor.white),
                               ),
                             ],
                           ),
@@ -161,7 +161,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                               const SizedBox(width: 8),
                               Text(
                                 '${snapshot.data!.runtime}',
-                                style: TextStyle(color: AppColors.white),
+                                style: TextStyle(color: AppColor.white),
                               ),
                             ],
                           ),
@@ -185,7 +185,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                               const SizedBox(width: 8),
                               Text(
                                 '${snapshot.data!.rating}',
-                                style: TextStyle(color: AppColors.white),
+                                style: TextStyle(color: AppColor.white),
                               ),
                             ],
                           ),
@@ -288,7 +288,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         Text(
                           AppText.summary,
                           style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColor.white,
                             fontWeight: .w700,
                             fontSize: 24,
                           ),
@@ -296,7 +296,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         Text(
                           widget.movie.summary.toString(),
                           style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColor.white,
                             fontWeight: .w400,
                             fontSize: 16,
                           ),
@@ -305,7 +305,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                         Text(
                           AppText.genres,
                           style: TextStyle(
-                            color: AppColors.white,
+                            color: AppColor.white,
                             fontWeight: .w700,
                             fontSize: 24,
                           ),
@@ -334,7 +334,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
                               textAlign: TextAlign.center,
                               '${snapshot.data!.genres![index]}',
                               // "",
-                              style: TextStyle(color: AppColors.white),
+                              style: TextStyle(color: AppColor.white),
                             ),
                           ),
                           physics: const NeverScrollableScrollPhysics(),

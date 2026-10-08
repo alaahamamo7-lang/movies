@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
-import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/my_custom_text_form_feild.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 import 'package:movies/features/update_profile/widget/custom_bottom_sheet.dart';
 
@@ -65,9 +65,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   key: _formState,
                   child: Column(
                     children: [
-                      CustomTextFormField(hint: "Name", icon: AppAssets.person),
+                      MyCustomTextFormField(
+                        hint: "Name",
+                        prefixIcon: AppAssets.person,
+                      ),
                       SizedBox(height: sizeH * 0.02),
-                      CustomTextFormField(hint: "Phone", icon: AppAssets.phone),
+                      MyCustomTextFormField(
+                        hint: "Phone",
+                        prefixIcon: AppAssets.phone,
+                      ),
                       SizedBox(height: sizeH * 0.001),
                       Row(
                         mainAxisAlignment: .start,

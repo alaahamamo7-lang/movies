@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies/core/app_colors.dart';
+
+import 'package:movies/core/constants/app_color.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -68,14 +69,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   },
                   icon: Icon(
                     isShowPaasowrd ? Icons.visibility_off : Icons.visibility,
-                    color: AppColors.white,
+                    color: AppColor.white,
                   ),
                 ),
-          hoverColor: AppColors.white,
+          hoverColor: AppColor.white,
         ),
         obscureText: isShowPaasowrd,
-        cursorColor: AppColors.white,
-        style: TextStyle(color: AppColors.white),
+        cursorColor: AppColor.white,
+        style: TextStyle(color: AppColor.white),
       ),
     );
   }

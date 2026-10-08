@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/constants/app_color.dart';
+
 import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/home/domain/entities/movie.dart';
@@ -50,7 +51,7 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black,
+              color: AppColor.black,
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -74,7 +75,7 @@ class MovieCard extends StatelessWidget {
                         height: 24,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: AppColors.yellow,
+                          color: AppColor.yellow,
                         ),
                       ),
                     ),
@@ -85,7 +86,7 @@ class MovieCard extends StatelessWidget {
                   child: const Center(
                     child: Icon(
                       Icons.movie_creation_outlined,
-                      color: AppColors.white,
+                      color: AppColor.white,
                       size: 36,
                     ),
                   ),
@@ -101,9 +102,9 @@ class MovieCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.black,
+                    color: AppColor.black,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.white, width: 0.5),
+                    border: Border.all(color: AppColor.white, width: 0.5),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -111,13 +112,13 @@ class MovieCard extends StatelessWidget {
                       Text(
                         (movie.rating ?? 0.0).toStringAsFixed(1),
                         style: const TextStyle(
-                          color: AppColors.white,
+                          color: AppColor.white,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 3),
-                      const Icon(Icons.star, color: AppColors.yellow, size: 13),
+                      const Icon(Icons.star, color: AppColor.yellow, size: 13),
                     ],
                   ),
                 ),

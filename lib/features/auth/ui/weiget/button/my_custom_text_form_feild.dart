@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/constants/app_color.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class MyCustomTextFormField extends StatelessWidget {
   final String hint;
-  final String icon;
+  final String prefixIcon;
   final FormFieldValidator<String>? validator;
   final TextEditingController? controller;
   final String? suffixIcon;
-  CustomTextFormField({
+  MyCustomTextFormField({
     super.key,
     required this.hint,
-    required this.icon,
+    required this.prefixIcon,
     this.suffixIcon,
     this.validator,
     this.controller,
@@ -38,7 +38,7 @@ class CustomTextFormField extends StatelessWidget {
                 height: size.height * 0.026,
               ),
         prefixIcon: SvgPicture.asset(
-          icon,
+          prefixIcon,
           colorFilter: ColorFilter.mode(
             theme.colorScheme.onSurfaceVariant,
             BlendMode.srcIn,

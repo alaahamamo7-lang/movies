@@ -12,7 +12,7 @@ import 'package:movies/features/auth/ui/cubit/login_cubit.dart';
 import 'package:movies/features/auth/ui/cubit/states/login_state.dart';
 
 import 'package:movies/features/auth/ui/weiget/button/custom_text_button.dart';
-import 'package:movies/features/auth/ui/weiget/button/custom_text_form_felid_button.dart';
+import 'package:movies/features/auth/ui/weiget/button/my_custom_text_form_feild.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -53,18 +53,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        CustomTextFormField(
+                        MyCustomTextFormField(
                           hint: AppText.email,
-                          icon: AppAssets.emailIcon,
+                          prefixIcon: AppAssets.emailIcon,
                           controller: emailController,
                           validator: (email) =>
                               AppValidators.validateEmail(email: email),
                           // controller: emailController,
                         ),
                         SizedBox(height: size * 0.02),
-                        CustomTextFormField(
+                        MyCustomTextFormField(
                           hint: AppText.password,
-                          icon: AppAssets.passwordIcon,
+                          prefixIcon: AppAssets.passwordIcon,
                           suffixIcon: AppAssets.svgEyeOff,
                           controller: passwordController,
                           validator: (password) =>

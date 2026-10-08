@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/core/constants/app_theme.dart';
+import 'package:movies/features/home/home_screen/ui/home_screen.dart';
 
 import 'package:movies/features/onboarding/ui/screen/onboarding_screen.dart';
 
@@ -26,7 +27,7 @@ class Movies extends StatelessWidget {
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
 
-      home: const OnBoardingScreen(),
+      home: HomeScreen(),
     );
   }
 }
