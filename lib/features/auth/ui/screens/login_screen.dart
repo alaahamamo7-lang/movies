@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         CustomTextFormField(
                           hint: AppText.email,
-                          icon: AppAssets.svgEmail,
+                          icon: AppAssets.emailIcon,
                           controller: emailController,
                           validator: (email) =>
                               AppValidators.validateEmail(email: email),
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(height: size * 0.02),
                         CustomTextFormField(
                           hint: AppText.password,
-                          icon: AppAssets.svgPassword,
+                          icon: AppAssets.passwordIcon,
                           suffixIcon: AppAssets.svgEyeOff,
                           controller: passwordController,
                           validator: (password) =>

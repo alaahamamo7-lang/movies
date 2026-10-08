@@ -1,4 +1,6 @@
-import '../../../../core/utilis/app_assets.dart';
+//
+
+import 'package:movies/core/constants/app_assets.dart';
 
 class AvatarWidget {
   final String imagePath;
@@ -9,8 +11,8 @@ class AvatarWidget {
   });
 
   static List<AvatarWidget> avatars = [
-    AvatarWidget(imagePath: AppAssets.avatar1, label: "Avatar 1"),
-    AvatarWidget(imagePath: AppAssets.avatar2, label: "Avatar 2"),
-    AvatarWidget(imagePath: AppAssets.avatar3, label: "Avatar 3"),
+    AvatarWidget(imagePath: AppAssets.avatar_1, label: "Avatar 1"),
+    AvatarWidget(imagePath: AppAssets.avatar_2, label: "Avatar 2"),
+    AvatarWidget(imagePath: AppAssets.avatar_3, label: "Avatar 3"),
   ];
 }

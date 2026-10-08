@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movies/core/constants/app_color.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hint;
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
+        hoverColor: AppColor.white,
         suffixIcon: suffixIcon == null
             ? null
             : SvgPicture.asset(
@@ -35,10 +37,14 @@ class CustomTextFormField extends StatelessWidget {
                 fit: .scaleDown,
                 height: size.height * 0.026,
               ),
-        prefixIcon: Image.asset(
+        prefixIcon: SvgPicture.asset(
           icon,
-          color: theme.colorScheme.onSurfaceVariant,
+          colorFilter: ColorFilter.mode(
+            theme.colorScheme.onSurfaceVariant,
+            BlendMode.srcIn,
+          ),
           fit: .scaleDown,
+          height: size.height * 0.026,
         ),
         hintText: hint,
         hintStyle: theme.textTheme.displayMedium,

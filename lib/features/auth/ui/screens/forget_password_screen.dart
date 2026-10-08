@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_color.dart';
 import 'package:movies/core/constants/app_text.dart';
 import 'package:movies/core/utilis/app_validators.dart';
@@ -9,8 +10,6 @@ import 'package:movies/features/auth/ui/cubit/forget_password_cubit.dart';
 import 'package:movies/features/auth/ui/cubit/states/forget_password_state.dart';
 import 'package:movies/features/auth/ui/screens/login_screen.dart';
 import 'package:movies/features/auth/ui/weiget/custom_text_field_widgt.dart';
-
-import '../../../../core/utilis/app_assets.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});

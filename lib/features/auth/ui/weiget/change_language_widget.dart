@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies/core/utilis/app_assets.dart';
+import 'package:movies/core/constants/app_assets.dart';
 
 class ChangeLanguageWidget extends StatefulWidget {
   final Function() onTap;
