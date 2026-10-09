@@ -10,6 +10,10 @@ class ProfileTab extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     ThemeData theme = Theme.of(context);
-    return Scaffold(body: Column(children: [ProfileHeader()]));
+    return Scaffold(
+      body: Column(
+        children: [ProfileHeader(), Image.asset(AppAssets.placeholder)],
+      ),
+    );
   }
 }

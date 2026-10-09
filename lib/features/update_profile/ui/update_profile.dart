@@ -25,7 +25,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back, color: theme.colorScheme.primary),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(Icons.arrow_back, color: theme.colorScheme.primary),
+        ),
         title: Text(
           AppText.pickAvatar,
           style: theme.textTheme.displayMedium!.copyWith(

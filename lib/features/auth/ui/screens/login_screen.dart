@@ -170,7 +170,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             CustomTextButton(
                               label: Text(
                                 AppText.createAccount,
-                                style: theme.textTheme.displaySmall,
+                                style: theme.textTheme.displaySmall!.copyWith(
+                                  color: AppColor.white,
+                                ),
                               ),
                               onTap: () => Navigator.push(
                                 context,

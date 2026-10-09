@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies/core/constants/app_assets.dart';
 import 'package:movies/core/constants/app_color.dart';
+import 'package:movies/core/constants/routes/app_routes.dart';
 import 'package:movies/features/auth/ui/weiget/button/main_button.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -85,7 +86,11 @@ class ProfileHeader extends StatelessWidget {
                     label: Text("Edit Profile"),
                     buttonBg: AppColor.yellow,
                     buttonFg: AppColor.black,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).push(AppRoutes.updateProfileScreen());
+                    },
                   ),
                 ),
                 SizedBox(width: size.width * 0.04),

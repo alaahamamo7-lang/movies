@@ -24,6 +24,7 @@ class MyCustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      style: TextStyle(fontSize: 16, color: AppColor.white),
       decoration: InputDecoration(
         hoverColor: AppColor.white,
         suffixIcon: suffixIcon == null
